@@ -40,7 +40,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.activation.MimetypesFileTypeMap;
+import jakarta.activation.MimetypesFileTypeMap;
 
 import org.openimaj.image.FImage;
 import org.openimaj.image.ImageUtilities;

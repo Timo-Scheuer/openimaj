@@ -122,7 +122,7 @@
 		<module>web</module>
 		<module>hardware</module>
 		<module>content</module>
-		<module>ide-integration</module>
+		<!-- <module>ide-integration</module> -->
 		<!-- <module>distribution</module> -->
 		<module>documentation</module>
 	</modules>
@@ -131,7 +131,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.10.4</version>
+				<version>3.6.3</version>
 				<configuration>
 					<bottom><![CDATA[
 					<div style="display:none">
@@ -176,7 +176,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.7.1</version>
+				<version>3.12.1</version>
 				<inherited>false</inherited>
 				<dependencies>
 					<dependency>
@@ -251,7 +251,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.1.2</version>
+				<version>3.3.0</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -265,13 +265,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>3.11.0</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-					<annotationProcessors>
-						<annotationProcessor>org.openimaj.citation.annotation.processor.ReferenceProcessor</annotationProcessor>
-					</annotationProcessors>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+					<!-- Annotation processor configuration moved to pluginManagement -->
 				</configuration>
 			</plugin>
 			<plugin>
@@ -405,6 +403,30 @@
 		<pluginManagement>
 			<plugins>
 				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.11.0</version>
+					<configuration>
+						<source>${maven.compiler.source}</source>
+						<target>${maven.compiler.target}</target>
+						<annotationProcessors>
+							<annotationProcessor>org.openimaj.citation.annotation.processor.ReferenceProcessor</annotationProcessor>
+						</annotationProcessors>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>org.openimaj</groupId>
+							<artifactId>core-citation</artifactId>
+							<version>${project.version}</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>3.2.5</version>
+				</plugin>
+				<plugin>
 					<artifactId>maven-release-plugin</artifactId>
 					<version>2.4</version>
 					<dependencies>
@@ -421,7 +443,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-shade-plugin</artifactId>
-					<version>1.6</version>
+					<version>3.5.2</version>
 					<executions>
 						<execution>
 							<phase>package</phase>
@@ -730,6 +752,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<github.global.server>github-pages-site</github.global.server>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 	</properties>
 	<scm>
 		<connection>scm:git:https://github.com/openimaj/openimaj.git</connection>

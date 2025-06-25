@@ -52,33 +52,40 @@
       <version>4.8.2</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+        <groupId>org.openimaj</groupId>
+        <artifactId>core-citation</artifactId>
+        <version>${project.version}</version>
+        <!-- <scope>provided</scope> /* Using compile scope for now to be safe */ -->
+    </dependency>
   </dependencies>
 
   <build>
     <plugins>
-        <plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.3.2</version>
-        <configuration combine.self="override">
-          <source>1.7</source>
-          <target>1.7</target>
+        <!-- Version and basic config will be inherited from parent's pluginManagement -->
+        <configuration>
+          <!-- Explicitly add processor and its path for this module -->
+          <annotationProcessors>
+            <annotationProcessor>org.openimaj.citation.annotation.processor.ReferenceProcessor</annotationProcessor>
+          </annotationProcessors>
+          <compilerArgs>
+            <arg>-Agoal=process</arg> <!-- Example, if ReferenceProcessor needs it -->
+          </compilerArgs>
         </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.openimaj</groupId>
+            <artifactId>core-citation</artifactId>
+            <version>${project.version}</version>
+          </dependency>
+        </dependencies>
       </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-source-plugin</artifactId>
-            <executions>
-                <execution>
-                <id>attach-sources</id>
-                <goals>
-                    <goal>jar</goal>
-                </goals>
-                </execution>
-            </executions>
-        </plugin>
+      <!-- maven-source-plugin configuration will be inherited from parent -->
         
-        <plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-javadoc-plugin</artifactId>
             <executions>
@@ -94,7 +101,6 @@
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.17</version>
             <configuration>
                 <!-- tests are very slow, so disabled by default -->
                 <skipTests>true</skipTests>
