@@ -69,19 +69,8 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.6</version>
-        <configuration>
-          <argLine>-Xmx1G -Djava.awt.headless=true</argLine>
-          <!-- <parallel>classes</parallel>
- 		            <perCoreThreadCount>2</perCoreThreadCount> -->
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>uk.ac.soton.ecs.jsh2</groupId>
         <artifactId>jtemp-maven-plugin</artifactId>
-        <version>1.2</version>
         <executions>
           <execution>
             <goals>

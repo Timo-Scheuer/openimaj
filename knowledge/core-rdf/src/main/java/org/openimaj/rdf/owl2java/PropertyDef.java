@@ -37,8 +37,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.xml.bind.PropertyException;
-
 import org.apache.commons.lang.WordUtils;
 import org.openimaj.rdf.owl2java.Generator.GeneratorOptions;
 import org.openimaj.rdf.serialize.Predicate;

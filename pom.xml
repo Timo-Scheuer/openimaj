@@ -131,7 +131,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.10.4</version>
+				<version>${maven-javadoc-plugin.version}</version>
 				<configuration>
 					<bottom><![CDATA[
 					<div style="display:none">
@@ -152,7 +152,10 @@
 					</div>
 					]]></bottom>
 					<linksource>true</linksource>
-					<additionalparam>-Xdoclint:none --allow-script-in-comments</additionalparam>
+					<doclint>none</doclint>
+					<additionalJOptions>
+						<additionalJOption>--allow-script-in-comments</additionalJOption>
+					</additionalJOptions>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -204,7 +207,7 @@
 						<plugin>
 							<groupId>org.apache.maven.plugins</groupId>
 							<artifactId>maven-javadoc-plugin</artifactId>
-							<version>2.10.4</version>
+							<version>${maven-javadoc-plugin.version}</version>
 							<configuration>
 								<bottom><![CDATA[
 								<div style="display:none">
@@ -225,7 +228,10 @@
 								</div>
 								]]></bottom>
 								<linksource>true</linksource>
-								<additionalparam>-Xdoclint:none -allow-script-in-comments</additionalparam>
+								<doclint>none</doclint>
+								<additionalJOptions>
+									<additionalJOption>--allow-script-in-comments</additionalJOption>
+								</additionalJOptions>
 							</configuration>
 						</plugin>
 					</reportPlugins>
@@ -265,18 +271,18 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<release>${java.version}</release>
 					<annotationProcessors>
 						<annotationProcessor>org.openimaj.citation.annotation.processor.ReferenceProcessor</annotationProcessor>
 					</annotationProcessors>
 				</configuration>
 			</plugin>
 			<plugin>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.10</version>
+    			<groupId>org.apache.maven.plugins</groupId>
+    			<artifactId>maven-dependency-plugin</artifactId>
+				<version>${maven-dependency-plugin.version}</version>
 				<inherited>false</inherited>
 				<executions>
 					<!-- Site assembly -->
@@ -461,6 +467,21 @@
 						</additionalConfig>
 					</configuration>
 				</plugin>
+			    <plugin>
+			        <groupId>org.apache.maven.plugins</groupId>
+			        <artifactId>maven-surefire-plugin</artifactId>
+			        <version>${maven-surefire-plugin.version}</version>
+			        <configuration>
+			          <argLine>-Xmx1G -Djava.awt.headless=true</argLine>
+			          <!-- <parallel>classes</parallel>
+					 		            <perCoreThreadCount>2</perCoreThreadCount> -->
+			        </configuration>
+			    </plugin>
+				<plugin>
+			        <groupId>uk.ac.soton.ecs.jsh2</groupId>
+			        <artifactId>jtemp-maven-plugin</artifactId>
+			        <version>${jtemp-plugin.version}</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
@@ -475,7 +496,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-javadoc-plugin</artifactId>
-						<version>2.10.4</version>
+						<version>${maven-javadoc-plugin.version}</version>
 						<configuration>
 							<bottom><![CDATA[
 							<div style="display:none">
@@ -496,7 +517,10 @@
 							</div>
 							]]></bottom>
 							<linksource>true</linksource>
-							<additionalparam>-Xdoclint:none --allow-script-in-comments</additionalparam>
+							<doclint>none</doclint>
+							<additionalJOptions>
+								<additionalJOption>--allow-script-in-comments</additionalJOption>
+							</additionalJOptions>
 						</configuration>
 						<executions>
 							<execution>
@@ -517,7 +541,7 @@
 								<plugin>
 									<groupId>org.apache.maven.plugins</groupId>
 									<artifactId>maven-javadoc-plugin</artifactId>
-									<version>2.10.4</version>
+									<version>${maven-javadoc-plugin.version}</version>
 									<configuration>
 										<bottom><![CDATA[
 											<div style="display:none">
@@ -538,7 +562,10 @@
 											</div>
 										]]></bottom>
 										<linksource>true</linksource>
-										<additionalparam>-Xdoclint:none --allow-script-in-comments</additionalparam>
+										<doclint>none</doclint>
+										<additionalJOptions>
+											<additionalJOption>--allow-script-in-comments</additionalJOption>
+										</additionalJOptions>
 									</configuration>
 									<reportSets>
 										<reportSet>
@@ -635,7 +662,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.10.4</version>
+				<version>${maven-javadoc-plugin.version}</version>
 				<inherited>false</inherited>
 				<configuration>
 					<excludePackageNames>org.openimaj.demos.*:org.openimaj.examples.*</excludePackageNames>
@@ -658,7 +685,10 @@
 					</div>
 					]]></bottom>
 					<linksource>true</linksource>
-					<additionalparam>-Xdoclint:none --allow-script-in-comments</additionalparam>
+					<doclint>none</doclint>
+					<additionalJOptions>
+						<additionalJOption>--allow-script-in-comments</additionalJOption>
+					</additionalJOptions>
 					<tags>
 						<tag>
 							<name>created</name>
@@ -730,6 +760,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<github.global.server>github-pages-site</github.global.server>
+		<java.version>21</java.version>
+		<jtemp-plugin.version>1.3.0</jtemp-plugin.version>
+		<maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+		<maven-dependency-plugin.version>3.8.1</maven-dependency-plugin.version>
+		<maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
+		<maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
 	</properties>
 	<scm>
 		<connection>scm:git:https://github.com/openimaj/openimaj.git</connection>

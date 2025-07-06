@@ -45,6 +45,12 @@
       <version>1.4-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
+    
+	<dependency>
+	    <groupId>jakarta.activation</groupId>
+	    <artifactId>jakarta.activation-api</artifactId>
+	</dependency>
+    
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -94,16 +100,6 @@
             <jtemp>JAVADOC_STYLE</jtemp>
           </mapping>
           <useDefaultMapping>true</useDefaultMapping>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.6</version>
-        <configuration>
-          <argLine>-Xmx2G -Djava.awt.headless=true</argLine>
-          <!-- <parallel>classes</parallel>
-	            <perCoreThreadCount>2</perCoreThreadCount> -->
         </configuration>
       </plugin>
     </plugins>

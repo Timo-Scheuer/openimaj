@@ -39,6 +39,8 @@ import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
+import javax.annotation.processing.SupportedSourceVersion;
+import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic.Kind;
@@ -59,6 +61,7 @@ import org.openimaj.citation.annotation.output.StandardFormatters;
  *
  * @author Jonathon Hare (jsh2@ecs.soton.ac.uk)
  */
+@SupportedSourceVersion(SourceVersion.RELEASE_21)
 @SupportedAnnotationTypes(
 		value = { "org.openimaj.citation.annotation.Reference", "org.openimaj.citation.annotation.References" })
 public class ReferenceProcessor extends AbstractProcessor {
