@@ -4,12 +4,14 @@
   <artifactId>openimaj-documentation</artifactId>
   <packaging>pom</packaging>
   <name>OpenIMAJ Documentation</name>
+  
   <parent>
     <artifactId>openimaj</artifactId>
     <groupId>org.openimaj</groupId>
     <version>1.4-SNAPSHOT</version>
     <relativePath>../</relativePath>
   </parent>
+  
   <inceptionYear>2011</inceptionYear>
   <description>
 			Submodule for documentation.
@@ -17,4 +19,52 @@
   <modules>
 		<module>tutorial</module>
   </modules>
+  
+  <properties>
+    <groovy.version>4.0.27</groovy.version>
+  	<gmavenplus-plugin.version>4.0.1</gmavenplus-plugin.version>
+  	<maven-plugin.version>3.9.6</maven-plugin.version>
+  </properties>
+  
+  <dependencyManagement>
+  	<dependencies>
+        <dependency>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>   
+		<dependency>
+		    <groupId>org.apache.groovy</groupId>
+		    <artifactId>groovy-ant</artifactId>
+		    <version>${groovy.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.groovy</groupId>
+		    <artifactId>groovy-xml</artifactId>
+		    <version>${groovy.version}</version>
+		</dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>${maven-plugin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-core</artifactId>
+            <version>${maven-plugin.version}</version>
+        </dependency>
+  	</dependencies>
+  </dependencyManagement>
+  
+  <build>
+  	<pluginManagement>
+  		<plugins>
+	        <plugin>
+	            <groupId>org.codehaus.gmavenplus</groupId>
+	            <artifactId>gmavenplus-plugin</artifactId>
+	            <version>${gmavenplus-plugin.version}</version>
+	        </plugin>
+  		</plugins>
+  	</pluginManagement>
+  </build>
 </project>
