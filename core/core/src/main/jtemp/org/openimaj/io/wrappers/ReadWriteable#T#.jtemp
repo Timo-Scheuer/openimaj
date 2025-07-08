@@ -127,7 +127,7 @@ public class ReadWriteable#T# implements ReadWriteable, Comparable<ReadWriteable
 	 */
 	@Override
 	public int hashCode(){
-		return new #TT#(value).hashCode();
+		return #TT#.valueOf(value).hashCode();
 	}
 
 	/* (non-Javadoc)
@@ -135,6 +135,6 @@ public class ReadWriteable#T# implements ReadWriteable, Comparable<ReadWriteable
 	 */
 	@Override
 	public int compareTo(ReadWriteable#T# arg0) {
-		return new #TT#(value).compareTo(arg0.value);
+		return #TT#.valueOf(value).compareTo(arg0.value);
 	}
 }
