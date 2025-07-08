@@ -326,7 +326,7 @@ public class BillMatlabFileDataGenerator implements MatrixDataGenerator<Matrix> 
 		final MLSparse arr = (MLSparse) this.content.get(mainMatrixKey);
 		final Double[] realVals = arr.exportReal();
 		final int[] rows = arr.getIR();
-		final int[] cols = arr.getIC();
+		final int[] cols = arr.getJC();
 		if(voc == null){
 			this.nwords = arr.getN();
 		}
