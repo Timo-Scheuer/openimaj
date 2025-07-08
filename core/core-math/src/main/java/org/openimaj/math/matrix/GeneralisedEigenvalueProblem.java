@@ -32,10 +32,11 @@ package org.openimaj.math.matrix;
 import no.uib.cipr.matrix.DenseMatrix;
 import no.uib.cipr.matrix.DenseVector;
 
-import org.netlib.lapack.LAPACK;
 import org.netlib.util.intW;
 import org.openimaj.util.array.ArrayUtils;
 import org.openimaj.util.pair.IndependentPair;
+
+import com.github.fommil.netlib.LAPACK;
 
 import Jama.Matrix;
 

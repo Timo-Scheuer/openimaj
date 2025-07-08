@@ -2,7 +2,7 @@ package ch.akuhn.matrix.eigenvalues;
 
 import java.util.Arrays;
 
-import org.netlib.arpack.ARPACK;
+import com.github.fommil.netlib.ARPACK;
 import org.netlib.util.doubleW;
 import org.netlib.util.intW;
 

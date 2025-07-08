@@ -38,7 +38,8 @@ public class TestFewEigenvalues {
 	 */
 	@Before
 	public void before() throws IOException {
-		final MatFileReader reader = new MatFileReader(TestFewEigenvalues.class.getResourceAsStream("test_eig.mat"));
+		final MatFileReader reader = new MatFileReader(
+			TestFewEigenvalues.class.getResource("test_eig.mat").getFile());
 		final Map<String, MLArray> content = reader.getContent();
 		L = fromMLArray((MLDouble) content.get("L"));
 		fromMLArray((MLDouble) content.get("evec"));
