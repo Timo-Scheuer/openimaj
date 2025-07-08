@@ -52,6 +52,7 @@ import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Scanner;
 
 import org.objenesis.strategy.StdInstantiatorStrategy;
@@ -80,19 +81,10 @@ public class IOUtils {
 	 */
 	public static <T extends InternalReadable> T newInstance(Class<T> cls) {
 		try {
-			return cls.newInstance();
+			final Constructor<T> constr = cls.getDeclaredConstructor();
+			constr.setAccessible(true);
+			return constr.newInstance();
 		} catch (final Exception e) {
-			try {
-				final Constructor<T> constr = cls.getDeclaredConstructor();
-
-				if (constr != null) {
-					constr.setAccessible(true);
-					return constr.newInstance();
-				}
-			} catch (final Exception e1) {
-				throw new RuntimeException(e);
-			}
-
 			throw new RuntimeException(e);
 		}
 	}
@@ -298,12 +290,8 @@ public class IOUtils {
 	 *             an error reading the file
 	 */
 	public static <T extends InternalReadable> T read(File f, T obj) throws IOException {
-		final FileInputStream fos = new FileInputStream(f);
-		try {
+		try (FileInputStream fos = new FileInputStream(f)) {
 			return read(fos, obj);
-		} finally {
-			if (fos != null)
-				fos.close();
 		}
 	}
 
@@ -324,12 +312,8 @@ public class IOUtils {
 	 *             an error reading the file
 	 */
 	public static <T extends InternalReadable> T read(File f, T obj, String charset) throws IOException {
-		final FileInputStream fos = new FileInputStream(f);
-		try {
+		try (FileInputStream fos = new FileInputStream(f)) {
 			return read(fos, obj, charset);
-		} finally {
-			if (fos != null)
-				fos.close();
 		}
 	}
 
@@ -363,7 +347,7 @@ public class IOUtils {
 			final BufferedReader br = new BufferedReader(new InputStreamReader(bis));
 			final char[] holder = new char[((ReadableASCII) obj).asciiHeader().length()];
 			br.read(holder);
-			((ReadableASCII) obj).readASCII(new Scanner(br));
+			((ReadableASCII) obj).readASCII(new Scanner(br).useLocale(Locale.ENGLISH));
 			return obj;
 		}
 	}
