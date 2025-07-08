@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	
 	<groupId>org.openimaj</groupId>
 	<artifactId>openimaj</artifactId>
 	<packaging>pom</packaging>
-	<version>1.4-SNAPSHOT</version>
+	<version>1.5.0-SNAPSHOT</version>
 	<name>OpenIMAJ master project</name>
+	
 	<url>http://www.openimaj.org</url>
 	<inceptionYear>2011</inceptionYear>
 	<description>
-		OpenIMAJ (Open Intelligent Multimedia in Java) is a collection of libraries and tools for multimedia analysis written in the Java programming language. OpenIMAJ intends to be the first truly complete multimedia analysis library and contains modules for analysing images, videos, text, audio and even webpages. The OpenIMAJ image and video analysis and feature extraction modules contain methods for processing visual content and extracting state-of-the-art features, including SIFT. The OpenIMAJ clustering and nearest-neighbour libraries contain efficient, multi-threaded implementations of clustering algorithms including Hierarchical K-Means and Approximate K-Means. The clustering library makes it possible to easily create visual-bag-of-words representations for images and video with very large vocabularies. The text-analysis modules contain implementations of a statistical language classifier and low-level processing pipeline. A number of modules deal with content creation, including interactive slideshows and animations. The hardware integration modules allow cross-platform integration with devices including webcams, the Microsoft Kinect, and even devices such as GPS's. OpenIMAJ also incorporates a number of tools to enable extremely-large-scale multimedia analysis using a distributed computing approach based on Apache Hadoop.</description>
+		OpenIMAJ (Open Intelligent Multimedia in Java) is a collection of libraries and tools for multimedia analysis written in the Java programming language. OpenIMAJ intends to be the first truly complete multimedia analysis library and contains modules for analysing images, videos, text, audio and even webpages. The OpenIMAJ image and video analysis and feature extraction modules contain methods for processing visual content and extracting state-of-the-art features, including SIFT. The OpenIMAJ clustering and nearest-neighbour libraries contain efficient, multi-threaded implementations of clustering algorithms including Hierarchical K-Means and Approximate K-Means. The clustering library makes it possible to easily create visual-bag-of-words representations for images and video with very large vocabularies. The text-analysis modules contain implementations of a statistical language classifier and low-level processing pipeline. A number of modules deal with content creation, including interactive slideshows and animations. The hardware integration modules allow cross-platform integration with devices including webcams, the Microsoft Kinect, and even devices such as GPS's. OpenIMAJ also incorporates a number of tools to enable extremely-large-scale multimedia analysis using a distributed computing approach based on Apache Hadoop.
+	</description>
 	<licenses>
 		<license>
 			<name>New BSD</name>
@@ -274,9 +277,9 @@
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
 					<release>${java.version}</release>
-					<annotationProcessors>
+					<!--annotationProcessors>
 						<annotationProcessor>org.openimaj.citation.annotation.processor.ReferenceProcessor</annotationProcessor>
-					</annotationProcessors>
+					</annotationProcessors-->
 				</configuration>
 			</plugin>
 			<plugin>
@@ -481,6 +484,13 @@
 			        <groupId>uk.ac.soton.ecs.jsh2</groupId>
 			        <artifactId>jtemp-maven-plugin</artifactId>
 			        <version>${jtemp-plugin.version}</version>
+			        <executions>
+			          <execution>
+			            <goals>
+			              <goal>generate</goal>
+			            </goals>
+			          </execution>
+			        </executions>
 				</plugin>
 			</plugins>
 		</pluginManagement>
