@@ -1,47 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  
   <parent>
     <artifactId>openimaj-core-libs</artifactId>
     <groupId>org.openimaj</groupId>
     <version>1.5.0-SNAPSHOT</version>
 	<relativePath>../</relativePath>
   </parent>
+  
   <artifactId>core-aop-support</artifactId>
   <packaging>jar</packaging>
   <name>Core Aspect Oriented Programming Support</name>
 	<inceptionYear>2011</inceptionYear>
-  <description>Core support for Aspect Oriented Programming and Bytecode manipulation as used in core-citation and core-experiment</description>
+  <description>
+  	Core support for Aspect Oriented Programming and Bytecode manipulation as used in core-citation
+  	and core-experiment
+  </description>
+  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <javassist.version>3.30.2-GA</javassist.version>
+    <jbibtex.version>1.0.20</jbibtex.version>
+    <junit.version>4.13.2</junit.version>
+    <log4j.version>2.25.0</log4j.version>
   </properties>
+  
   <dependencies>
     <dependency>
       <groupId>org.jbibtex</groupId>
       <artifactId>jbibtex</artifactId>
-      <version>r16</version>
+      <version>${jbibtex.version}</version>
     </dependency>
     <dependency>
-      <groupId>javassist</groupId>
+      <groupId>org.javassist</groupId>
       <artifactId>javassist</artifactId>
-      <version>3.12.1.GA</version>
+      <version>${javassist.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-api</artifactId>
-      <version>2.17.1</version>
+      <version>${log4j.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
-      <version>2.17.1</version>
+      <version>${log4j.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.13.1</version>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
