@@ -165,7 +165,7 @@ public abstract class AbstractStreamBackedList<T extends Readable> extends Abstr
 	 */
 	protected T newElementInstance() {
 		try {
-			return clz.newInstance();
+			return clz.getDeclaredConstructor().newInstance();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

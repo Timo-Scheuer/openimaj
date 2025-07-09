@@ -104,7 +104,7 @@ public abstract class AbstractFileBackedList<T extends Readable> extends Abstrac
 	 */
 	protected T newElementInstance() {
 		try {
-			return clz.newInstance();
+			return clz.getDeclaredConstructor().newInstance();
 		} catch (final Exception e) {
 			throw new RuntimeException(e);
 		}
