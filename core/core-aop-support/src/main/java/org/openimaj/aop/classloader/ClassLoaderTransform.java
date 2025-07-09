@@ -31,6 +31,7 @@ package org.openimaj.aop.classloader;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Arrays;
@@ -275,14 +276,14 @@ public class ClassLoaderTransform {
 		}
 		final String manifestPath = classPath.substring(0,
 				classPath.lastIndexOf("!") + 1) + "/META-INF/MANIFEST.MF";
-		final Manifest manifest = new Manifest(new URL(manifestPath).openStream());
+		final Manifest manifest = new Manifest(new URI(manifestPath).toURL().openStream());
 		final Attributes attr = manifest.getMainAttributes();
 
 		final String mainClass = attr.getValue(MAIN_CLASS);
 		final String[] tfs = attr.getValue(TRANSFORMERS).split(TRANSFORMERS_SEPARATOR);
 		final ClassTransformer[] cts = new ClassTransformer[tfs.length];
 		for (int i = 0; i < tfs.length; i++)
-			cts[i] = (ClassTransformer) Class.forName(tfs[i]).newInstance();
+			cts[i] = (ClassTransformer) Class.forName(tfs[i]).getDeclaredConstructor().newInstance();
 
 		final ClassPool cp = ClassPool.getDefault();
 
