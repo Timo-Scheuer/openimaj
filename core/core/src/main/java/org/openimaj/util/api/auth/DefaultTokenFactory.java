@@ -33,6 +33,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -152,12 +153,12 @@ public class DefaultTokenFactory implements TokenFactory {
 	}
 
 	private <T> T createToken(Token def, Class<T> clz, String name) throws InstantiationException,
-			IllegalAccessException,
-			IOException, IllegalArgumentException, BackingStoreException
+			IllegalAccessException, InvocationTargetException, NoSuchMethodException,
+			IOException, IllegalArgumentException, BackingStoreException, SecurityException
 	{
 		final Map<Field, Parameter> params = getParameters(clz);
 
-		final T instance = clz.newInstance();
+		final T instance = clz.getDeclaredConstructor().newInstance();
 		if (params.size() == 0)
 			return instance;
 
@@ -367,9 +368,14 @@ public class DefaultTokenFactory implements TokenFactory {
 	 *             if the token could not be constructed
 	 * @throws IllegalAccessException
 	 *             if an error occurred setting a parameter
+	 * @throws SecurityException 
+	 * @throws NoSuchMethodException 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
 	 */
 	public <T> T loadToken(Class<T> clz, String name) throws BackingStoreException, InstantiationException,
-			IllegalAccessException
+			IllegalAccessException, IllegalArgumentException, InvocationTargetException,
+			NoSuchMethodException, SecurityException
 	{
 		final String tokName = name == null ? clz.getName() : clz.getName() + "-" + name;
 		Preferences prefs = Preferences.userRoot().node(PREFS_BASE_NODE);
@@ -380,7 +386,7 @@ public class DefaultTokenFactory implements TokenFactory {
 		prefs = prefs.node(tokName);
 		final String[] keys = prefs.keys();
 
-		final T instance = clz.newInstance();
+		final T instance = clz.getDeclaredConstructor().newInstance();
 
 		final Map<Field, Parameter> params = getParameters(clz);
 		for (final Entry<Field, Parameter> p : params.entrySet()) {

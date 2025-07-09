@@ -55,8 +55,8 @@ public class LoggerUtils {
 		final PatternLayout layout = PatternLayout.newBuilder().withPattern(PATTERN).build();
 		final ThresholdFilter filter = ThresholdFilter.createFilter(Level.DEBUG, Result.ACCEPT, Result.DENY);
 
-		final ConsoleAppender console = ConsoleAppender.newBuilder().withName("default-consoleappender")
-				.withLayout(layout).withFilter(filter).build();
+		final ConsoleAppender console = ConsoleAppender.newBuilder().setName("default-consoleappender")
+				.setLayout(layout).setFilter(filter).build();
 
 		// add appender to any Logger (here is root)
 		final Logger root = LogManager.getRootLogger();
