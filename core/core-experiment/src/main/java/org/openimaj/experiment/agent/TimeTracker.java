@@ -114,7 +114,7 @@ public class TimeTracker {
 	 */
 	public static void addMissing(Map<String, SummaryStatistics> timesToAdd) {
 		for (Entry<String, SummaryStatistics> e : timesToAdd.entrySet()) {
-			if (!times.containsKey(e.getValue()))
+			if (!times.containsKey(e.getKey()))
 				times.put(e.getKey(), e.getValue());
 		}
 	}
