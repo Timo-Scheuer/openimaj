@@ -30,8 +30,10 @@
 package org.openimaj.citation;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.openimaj.citation.annotation.Reference;
@@ -90,25 +92,36 @@ public class ReferenceListener {
 		processPackage(clz);
 	}
 
-	private static void processPackage(Class<?> clz) {
-		Package base = clz.getPackage();
-
-		while (base != null) {
-			if (base.isAnnotationPresent(Reference.class))
-				addReference(base.getAnnotation(Reference.class));
-
-			if (base.isAnnotationPresent(References.class))
-				for (final Reference r : base.getAnnotation(References.class).references())
+	/**
+	 * Add references for all packages in the package hierarchy
+	 * of a given class annotated with <code>@Reference</code>.
+	 * 
+	 * @param clz  class
+	 */
+	private static void processPackage(final Class<?> clz) {
+		for (Package p = clz.getPackage(); p != null; p = getParent(p).orElse(null)) {
+			if (p.isAnnotationPresent(Reference.class)) {
+				addReference(p.getAnnotation(Reference.class));
+				for (final Reference r : p.getAnnotation(References.class).references())
 					addReference(r);
-
-			final String name = base.getName();
-			final int dot = name.lastIndexOf(".");
-
-			if (dot < 0)
-				break;
-
-			base = Package.getPackage(name.substring(0, dot));
+			}
 		}
+	}
+	/**
+	 * Get the parent package.
+	 * 
+	 * @param p  input package
+	 * @return parent package or <code>null</code> if there is no parent package
+	 */
+	private static Optional<Package> getParent(final Package p) {
+		final String packageName = p.getName();
+		final int dotPos = packageName.lastIndexOf(".");
+		if (dotPos < 0)
+			return Optional.empty(); // there is no parent
+		final String parentPackageName = packageName.substring(0, dotPos);
+		return Arrays.stream(Package.getPackages())
+			.filter(x->x.getName().equals(parentPackageName))
+			.findFirst();
 	}
 
 	/**
