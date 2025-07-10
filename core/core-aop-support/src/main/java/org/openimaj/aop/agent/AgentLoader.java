@@ -37,19 +37,16 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.instrument.Instrumentation;
 import java.lang.management.ManagementFactory;
-import java.lang.reflect.Method;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.security.AccessController;
-import java.security.PrivilegedActionException;
-import java.security.PrivilegedExceptionAction;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+
+import com.sun.tools.attach.AgentInitializationException;
+import com.sun.tools.attach.AgentLoadException;
+import com.sun.tools.attach.AttachNotSupportedException;
+import com.sun.tools.attach.VirtualMachine;
 
 /**
  * Dynamic agent loader. Provides methods to extract an agent jar with a
@@ -62,8 +59,7 @@ import org.apache.logging.log4j.LogManager;
  * @author Jonathon Hare (jsh2@ecs.soton.ac.uk)
  */
 public class AgentLoader {
-	private static final Logger logger = LogManager.getLogger(AgentLoader.class);
-	private static final String VMCLASS = "com.sun.tools.attach.VirtualMachine";
+	private static final Logger LOGGER = LogManager.getLogger(AgentLoader.class);
 
 	private static long copy(InputStream input, OutputStream output) throws IOException {
 		long count = 0;
@@ -138,69 +134,6 @@ public class AgentLoader {
 	}
 
 	/**
-	 * Attempt to locate potential "tools.jar" jars
-	 */
-	private static List<File> getPotentialToolsJars() {
-		final List<File> jars = new ArrayList<File>();
-
-		final File javaHome = new File(System.getProperty("java.home"));
-
-		final File jreSourced = new File(javaHome, "lib/tools.jar");
-		if (jreSourced.exists()) {
-			jars.add(jreSourced);
-		}
-
-		if ("jre".equals(javaHome.getName())) {
-			final File jdkHome = new File(javaHome, "../");
-			final File jdkSourced = new File(jdkHome, "lib/tools.jar");
-			if (jdkSourced.exists()) {
-				jars.add(jdkSourced);
-			}
-		}
-
-		return jars;
-	}
-
-	/**
-	 * Try and get the VirtualMachine class
-	 */
-	private static Class<?> tryGetVMClass() {
-		try {
-			return AccessController.doPrivileged(new PrivilegedExceptionAction<Class<?>>() {
-				@Override
-				public Class<?> run() throws Exception {
-					try {
-						return ClassLoader.getSystemClassLoader().loadClass(VMCLASS);
-					} catch (final ClassNotFoundException e) {
-						for (final File jar : getPotentialToolsJars()) {
-							try {
-								return new URLClassLoader(new URL[] { jar.toURI().toURL() }).loadClass(VMCLASS);
-							} catch (final Throwable t) {
-								logger.trace("Exception while loading tools.jar from " + jar, t);
-							}
-						}
-					}
-					return null;
-				}
-			});
-		} catch (final PrivilegedActionException pae) {
-			final Throwable actual = pae.getCause();
-
-			if (actual instanceof ClassNotFoundException) {
-				logger.trace("No VirtualMachine found");
-				return null;
-			}
-
-			throw new RuntimeException("Unexpected checked exception : " + actual);
-		}
-	}
-
-	private static void loadFailed() {
-		System.err.println("Unable to load the java agent dynamically");
-		// FIXME: instructions
-	}
-
-	/**
 	 * Attempt to dynamically load the given agent class
 	 *
 	 * @param agentClass
@@ -217,26 +150,21 @@ public class AgentLoader {
 		final int p = nameOfRunningVM.indexOf('@');
 		final String pid = nameOfRunningVM.substring(0, p);
 
-		final Class<?> vmClass = tryGetVMClass();
-
-		if (vmClass == null) {
-			loadFailed();
-		} else {
+		try {
+			VirtualMachine vm = VirtualMachine.attach(pid);
 			try {
-				final Method attach = vmClass.getMethod("attach", String.class);
-				final Method loadAgent = vmClass.getMethod("loadAgent", String.class);
-				final Method detach = vmClass.getMethod("detach");
-
-				final Object vm = attach.invoke(null, pid);
-				try {
-					loadAgent.invoke(vm, tmp.getAbsolutePath());
-				} finally {
-					detach.invoke(vm);
-				}
-			} catch (final Exception e) {
-				logger.warn("Loading the agent failed", e);
-				loadFailed();
+				vm.loadAgent(tmp.getAbsolutePath());
+			} catch (AgentLoadException e) {
+				LOGGER.error("Agent does not exist or cannot be started", e);
+			} catch (AgentInitializationException e) {
+				LOGGER.error("Agent initialization failed", e);
+			} finally {
+				vm.detach();
 			}
+		} catch (AttachNotSupportedException e) {
+			LOGGER.error("JDK does not support loading the java agent dynamically");
+		} catch (IOException e) {
+			LOGGER.error("Unable to load the java agent dynamically", e);
 		}
 	}
 }

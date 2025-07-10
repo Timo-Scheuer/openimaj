@@ -1,7 +1,10 @@
 module org.openimaj.aop {
 	requires java.instrument;
 	requires java.management;
-	requires org.javassist;
+	requires jdk.attach;
+	requires transitive org.javassist;
 	requires org.apache.logging.log4j.core;
-	//exports ...;
+	
+	exports org.openimaj.aop;
+	exports org.openimaj.aop.agent;
 }
