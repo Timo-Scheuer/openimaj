@@ -29,7 +29,7 @@
  */
 package org.openimaj.experiment.validation.cross;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -59,19 +59,19 @@ public class GroupedKFoldTest {
 		for (final String group : new String[] { "A", "B", "C" }) {
 			equalDataset.getMap().put(group, new ListBackedDataset<Integer>());
 			for (int i = 0; i < 10; i++) {
-				((ListBackedDataset<Integer>) equalDataset.getMap().get(group)).add(new Integer(i));
+				((ListBackedDataset<Integer>) equalDataset.getMap().get(group)).add(Integer.valueOf(i));
 			}
 		}
 
 		unequalDataset = new MapBackedDataset<String, ListDataset<Integer>, Integer>();
 		unequalDataset.getMap().put("A", new ListBackedDataset<Integer>());
-		((ListBackedDataset<Integer>) unequalDataset.getMap().get("A")).add(new Integer(1));
-		((ListBackedDataset<Integer>) unequalDataset.getMap().get("A")).add(new Integer(2));
-		((ListBackedDataset<Integer>) unequalDataset.getMap().get("A")).add(new Integer(3));
+		((ListBackedDataset<Integer>) unequalDataset.getMap().get("A")).add(Integer.valueOf(1));
+		((ListBackedDataset<Integer>) unequalDataset.getMap().get("A")).add(Integer.valueOf(2));
+		((ListBackedDataset<Integer>) unequalDataset.getMap().get("A")).add(Integer.valueOf(3));
 
 		unequalDataset.getMap().put("B", new ListBackedDataset<Integer>());
-		((ListBackedDataset<Integer>) unequalDataset.getMap().get("B")).add(new Integer(1));
-		((ListBackedDataset<Integer>) unequalDataset.getMap().get("B")).add(new Integer(2));
+		((ListBackedDataset<Integer>) unequalDataset.getMap().get("B")).add(Integer.valueOf(1));
+		((ListBackedDataset<Integer>) unequalDataset.getMap().get("B")).add(Integer.valueOf(2));
 	}
 
 	/**

@@ -29,8 +29,8 @@
  */
 package org.openimaj.experiment.validation.cross;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import gnu.trove.set.hash.TIntHashSet;
 
 import org.junit.Before;
@@ -56,7 +56,7 @@ public class KFoldTest {
 		dataset = new ListBackedDataset<Integer>();
 		
 		for (int i=0; i<10; i++)
-			dataset.getList().add(new Integer(i));
+			dataset.getList().add(Integer.valueOf(i));
 	}
 
 	/**
