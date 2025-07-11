@@ -40,7 +40,7 @@ import java.util.NoSuchElementException;
  *
  * @author Sina Samangooei (ss@ecs.soton.ac.uk)
  */
-public class Context extends HashMap<String, Object> implements Cloneable {
+public class Context extends HashMap<String, Object> {
 	private static final long serialVersionUID = 1888665727867672296L;
 
 	private boolean failfast = false;

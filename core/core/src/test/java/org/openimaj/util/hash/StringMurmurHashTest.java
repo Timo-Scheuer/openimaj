@@ -32,8 +32,6 @@ package org.openimaj.util.hash;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.openimaj.util.hash.StringMurmurHashFunction;
-import org.openimaj.util.hash.StringMurmurHashFunctionFactory;
 
 /**
  * @author Sina Samangooei (ss@ecs.soton.ac.uk)

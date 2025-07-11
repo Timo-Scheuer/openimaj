@@ -34,13 +34,15 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.ProtocolException;
 import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.impl.client.RedirectLocations;
 import org.apache.http.protocol.HttpContext;
 import org.apache.logging.log4j.LogManager;
@@ -61,9 +63,10 @@ public class HttpUtilsTest {
 	 *
 	 * @throws MalformedURLException
 	 * @throws IOException
+	 * @throws URISyntaxException 
 	 */
 	@Test
-	public void testRedirect() throws MalformedURLException, IOException {
+	public void testRedirect() throws MalformedURLException, IOException, URISyntaxException {
 		final String[][] links = new String[][] {
 				// new String[] { "http://t.co/kp7qdeL6",
 				// "http://www.openrightsgroup.org/press/releases/bruce-willis-right-to-challenge-apple#copyright"
@@ -76,7 +79,7 @@ public class HttpUtilsTest {
 		for (final String[] link : links) {
 			final String[] expecting = Arrays.copyOfRange(link, 1, link.length);
 			final String firstLink = link[0];
-			HttpUtils.readURLAsByteArrayInputStream(new URL(firstLink), new HttpUtils.MetaRefreshRedirectStrategy() {
+			HttpUtils.readURLAsByteArrayInputStream(new URI(firstLink).toURL(), new HttpUtils.MetaRefreshRedirectStrategy() {
 				int redirected = 0;
 
 				@Override
@@ -88,7 +91,7 @@ public class HttpUtilsTest {
 						assertTrue(isRedirect);
 						final HttpUriRequest redirect = this.getRedirect(request, response, context);
 						final RedirectLocations redirectLocations = (RedirectLocations) context
-								.getAttribute(REDIRECT_LOCATIONS);
+								.getAttribute(HttpClientContext.REDIRECT_LOCATIONS);
 						if (redirectLocations != null)
 							redirectLocations.remove(redirect.getURI());
 						final String uriString = redirect.getURI().toString();
