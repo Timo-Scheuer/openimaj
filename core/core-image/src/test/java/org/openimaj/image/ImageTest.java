@@ -32,7 +32,7 @@
  */
 package org.openimaj.image;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.Test;
 
@@ -72,7 +72,7 @@ public class ImageTest
 			DisplayUtilities.display( img, "Shifted Left 10 times" );
 				
 		// If we shift left 10 times, the pixel from (99,99) moves to (89,99)
-		Assert.assertEquals( 1f, img.getPixel( 89, 99 ) );
+		Assert.assertEquals( 1f, img.getPixel( 89, 99 ), 0 );
 		
 		// Try it in one go
 		img = img.shiftLeft( 10 );
@@ -81,7 +81,7 @@ public class ImageTest
 			DisplayUtilities.display( img, "Shifted Left 10 times, then 20 pixels" );
 				
 		// We've effectively shifted left 20 times, the pixel (99,99) moves to (79,99)
-		Assert.assertEquals( 1f, img.getPixel( 79, 99 ) );
+		Assert.assertEquals( 1f, img.getPixel( 79, 99 ), 0 );
 
 		// if( DISPLAY ) forceWait();	
 	}
@@ -105,7 +105,7 @@ public class ImageTest
 			DisplayUtilities.display( img, "Shifted Right 10 times" );
 				
 		// If we shift right 10 times, the pixel (99,99) moves to (9,99)
-		Assert.assertEquals( 1f, img.getPixel( 9, 99 ) );
+		Assert.assertEquals( 1f, img.getPixel( 9, 99 ), 0 );
 		
 		// Try it in one go
 		img = img.shiftRight( 10 );
@@ -114,7 +114,7 @@ public class ImageTest
 			DisplayUtilities.display( img, "Shifted Right 10 times, then 20 pixels" );
 				
 		// We've effectively shifted left 20 times, the pixel (99,99) moves to (19,99)
-		Assert.assertEquals( 1f, img.getPixel( 19, 99 ) );
+		Assert.assertEquals( 1f, img.getPixel( 19, 99 ), 0 );
 
 		// if( DISPLAY ) forceWait();
 	}
