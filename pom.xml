@@ -277,6 +277,7 @@
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
 					<release>${java.version}</release>
+					<useModulePath>true</useModulePath>
 					<!--annotationProcessors>
 						<annotationProcessor>org.openimaj.citation.annotation.processor.ReferenceProcessor</annotationProcessor>
 					</annotationProcessors-->
