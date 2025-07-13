@@ -108,8 +108,8 @@ implements GroupedDataset<KEY, DATASET, INSTANCE>
 			if (index >= count + d.numInstances()) {
 				count += d.numInstances();
 			} else {
-				if (d instanceof ListDataset) {
-					return ((ListDataset<INSTANCE>) d).get(index - count);
+				if (d instanceof ListDataset ld) {
+					return (INSTANCE) ld.get(index - count);
 				} else {
 					for (final INSTANCE i : d) {
 						if (index == count)

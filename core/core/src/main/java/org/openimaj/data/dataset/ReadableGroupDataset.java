@@ -77,8 +77,8 @@ implements GroupedDataset<KEY, DATASET, INSTANCE>
 			final DATASET group = getInstances(key);
 
 			if (count + group.numInstances() > index) {
-				if (group instanceof ListDataset) {
-					return ((ListDataset<INSTANCE>) group).get(index - count);
+				if (group instanceof ListDataset ld) {
+					return (INSTANCE) ld.getInstance(index - count);
 				} else {
 					for (final INSTANCE i : group) {
 						if (index == count)
