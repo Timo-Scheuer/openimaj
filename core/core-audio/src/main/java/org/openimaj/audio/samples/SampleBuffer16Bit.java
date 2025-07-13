@@ -37,7 +37,7 @@ import java.nio.ByteOrder;
 import java.nio.ShortBuffer;
 import java.util.Iterator;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.openimaj.audio.AudioFormat;
 import org.openimaj.audio.SampleChunk;
 import org.openimaj.audio.timecode.AudioTimecode;

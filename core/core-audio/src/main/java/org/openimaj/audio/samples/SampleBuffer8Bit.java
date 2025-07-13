@@ -34,7 +34,7 @@ package org.openimaj.audio.samples;
 
 import java.util.Iterator;
 
-import org.apache.commons.lang.NotImplementedException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.openimaj.audio.AudioFormat;
 import org.openimaj.audio.SampleChunk;
 import org.openimaj.audio.timecode.AudioTimecode;

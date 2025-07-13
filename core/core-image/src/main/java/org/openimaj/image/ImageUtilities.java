@@ -53,7 +53,7 @@ import javax.imageio.ImageIO;
 import javax.imageio.stream.ImageOutputStream;
 
 import org.apache.commons.imaging.ImageFormats;
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.imaging.Imaging;
 import org.apache.commons.imaging.common.bytesource.ByteSource;
 import org.apache.commons.imaging.common.bytesource.ByteSourceInputStream;
