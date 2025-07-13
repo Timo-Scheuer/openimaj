@@ -43,8 +43,8 @@ import java.util.Map.Entry;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
-import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.WordUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.text.WordUtils;
 
 /**
  * Default implementation of a {@link TokenFactory} that loads the token
