@@ -137,25 +137,24 @@
 	<resources>
       <resource>
         <directory>src/main/filtered-resources</directory>
-				<filtering>true</filtering>
-				<targetPath>org/openimaj/</targetPath>
+			<filtering>true</filtering>
+			<targetPath>org/openimaj/</targetPath>
         <includes>
-          <include>OpenIMAJ.properties</include>
+        	<include>OpenIMAJ.properties</include>
         </includes>
       </resource>
-			<resource>
+	  <resource>
         <directory>src/main/resources/</directory>
-				<filtering>false</filtering>
+			<filtering>false</filtering>
         <includes>
-          <include>**/*</include>
+        	<include>**/*</include>
         </includes>
       </resource>
     </resources>
     <plugins>
       <plugin>
-        <groupId>com.mycila.maven-license-plugin</groupId>
-        <artifactId>maven-license-plugin</artifactId>
-        <version>1.9.0</version>
+		<groupId>com.mycila</groupId>
+		<artifactId>license-maven-plugin</artifactId>
         <configuration>
           <header>src/etc/header.txt</header>
           <strictCheck>true</strictCheck>
@@ -172,10 +171,10 @@
           <useDefaultMapping>true</useDefaultMapping>
         </configuration>
       </plugin>
-	      <plugin>
-	        <groupId>uk.ac.soton.ecs.jsh2</groupId>
-	        <artifactId>jtemp-maven-plugin</artifactId>
-	      </plugin>
+      <plugin>
+        <groupId>uk.ac.soton.ecs.jsh2</groupId>
+        <artifactId>jtemp-maven-plugin</artifactId>
+      </plugin>
     </plugins>
   </build>
 </project>
