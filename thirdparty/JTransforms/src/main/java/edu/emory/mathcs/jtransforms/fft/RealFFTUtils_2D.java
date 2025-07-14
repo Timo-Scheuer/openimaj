@@ -139,9 +139,9 @@ public class RealFFTUtils_2D {
      * <ul>
      * <li>if <code>index == {@link Integer#MIN_VALUE}</code>, then the Fourier
      * mode is zero,</li>
-     * <li>if <code>index >= 0</code>, then the Fourier mode is
+     * <li>if <code>index &gt;= 0</code>, then the Fourier mode is
      * <code>packed[index]</code>,</li>
-     * <li>if <code>index < 0</code>, then the Fourier mode is
+     * <li>if <code>index &lt; 0</code>, then the Fourier mode is
      * <code>-packed[-index]</code>,</li>
      * </ul>
      * </p>
