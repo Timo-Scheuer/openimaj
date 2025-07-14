@@ -75,7 +75,7 @@ public class Component implements Cloneable
 		features = new ComponentFeature[featureClasses.length];
 		for (int i = 0; i < featureClasses.length; i++) {
 			try {
-				features[i] = featureClasses[i].newInstance();
+				features[i] = featureClasses[i].getDeclaredConstructor().newInstance();
 			} catch (final Exception e) {
 				throw new AssertionError(e);
 			}

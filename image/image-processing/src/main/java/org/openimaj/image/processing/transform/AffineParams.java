@@ -92,7 +92,7 @@ public class AffineParams implements ReadWriteable {
 
 	@Override
 	public int hashCode() {
-		final int hash = new Float(theta).hashCode() ^ new Float(tilt).hashCode();
+		final int hash = Float.valueOf(theta).hashCode() ^ Float.valueOf(tilt).hashCode();
 		return hash;
 	}
 

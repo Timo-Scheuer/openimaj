@@ -166,7 +166,7 @@ public class TemplateMatcher implements ImageAnalyser<FImage> {
 					for (int x=0; x<template.width; x++)
 						sumsq += template.pixels[y][x]*template.pixels[y][x];
 
-				return new Float(sumsq);
+				return Float.valueOf(sumsq);
 			}
 		},
 		/**
@@ -280,7 +280,7 @@ public class TemplateMatcher implements ImageAnalyser<FImage> {
 					for (int x=0; x<template.width; x++)
 						sumsq += template.pixels[y][x]*template.pixels[y][x];
 
-				return new Float(sumsq);
+				return Float.valueOf(sumsq);
 			}
 		},
 		/**
