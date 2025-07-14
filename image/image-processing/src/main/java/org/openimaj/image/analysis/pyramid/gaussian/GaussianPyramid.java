@@ -31,7 +31,6 @@ package org.openimaj.image.analysis.pyramid.gaussian;
 
 import org.openimaj.image.FImage;
 import org.openimaj.image.Image;
-import org.openimaj.image.analyser.ImageAnalyser;
 import org.openimaj.image.analysis.pyramid.Pyramid;
 import org.openimaj.image.processing.resize.ResizeProcessor;
 import org.openimaj.image.processor.SinglebandImageProcessor;
@@ -56,11 +55,7 @@ import org.openimaj.image.processor.SinglebandImageProcessor;
  *            Type of underlying image
  */
 public class GaussianPyramid<I extends Image<?, I> & SinglebandImageProcessor.Processable<Float, FImage, I>>
-		extends
-		Pyramid<GaussianPyramidOptions<I>, GaussianOctave<I>, I>
-		implements
-		ImageAnalyser<I>, Iterable<GaussianOctave<I>>
-{
+		extends	Pyramid<GaussianPyramidOptions<I>, GaussianOctave<I>, I> {
 	/**
 	 * Construct a Pyramid with the given options.
 	 * 
