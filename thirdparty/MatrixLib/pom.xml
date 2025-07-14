@@ -13,26 +13,30 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    
+    <fommil-netlib.version>1.1.2</fommil-netlib.version>
+    <jmatio.version>1.5</jmatio.version>
+    <junit.version>4.13.2</junit.version>
   </properties>
 
   <dependencies>
   	<dependency>
 	    <groupId>com.github.fommil.netlib</groupId>
 	    <artifactId>all</artifactId>
-	    <version>1.1.2</version>
+	    <version>${fommil-netlib.version}</version>
 	    <type>pom</type>
 	    <scope>compile</scope>
 	</dependency>
 	<dependency>
 	    <groupId>org.tallison</groupId>
 	    <artifactId>jmatio</artifactId>
-	    <version>1.5</version>
+	    <version>${jmatio.version}</version>
         <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.13.2</version>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
