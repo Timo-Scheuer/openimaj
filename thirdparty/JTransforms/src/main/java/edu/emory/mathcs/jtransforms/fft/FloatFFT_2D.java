@@ -50,7 +50,7 @@ import edu.emory.mathcs.utils.ConcurrencyUtils;
  * @author Piotr Wendykier (piotr.wendykier@gmail.com)
  * 
  */
-public strictfp class FloatFFT_2D {
+public class FloatFFT_2D {
 
     private int rows;
 
