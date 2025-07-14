@@ -268,7 +268,7 @@ public abstract class AffineSimulation<I extends Image<P, I> & SinglebandImagePr
 	 *            the number of tilts to simulate.
 	 * @return the transformed images
 	 * @throws IllegalArgumentException
-	 *             if the number of tilts is < 1
+	 *             if the number of tilts is &lt; 1
 	 */
 	public static <I extends Image<P, I> & SinglebandImageProcessor.Processable<Float, FImage, I>, P>
 			List<I> transformImage(I image, int numTilts)
