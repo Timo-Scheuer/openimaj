@@ -175,8 +175,8 @@ public class IREval {
                 @Override
 				public int compare(String a, String b) {
                     try {
-                        Integer a1 = new Integer(a);
-                        Integer b1 = new Integer(b);
+                        Integer a1 = Integer.valueOf(a);
+                        Integer b1 = Integer.valueOf(b);
                         return a1.compareTo(b1);
                     } catch (NumberFormatException e) {
                         // not an integer
