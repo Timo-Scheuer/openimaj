@@ -33,7 +33,7 @@ import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Test;
 import org.openimaj.image.FImage;
-import org.openimaj.image.analysis.algorithm.histogram.InterpolatedBinnedWindowedExtractor;
+//import org.openimaj.image.analysis.algorithm.histogram.InterpolatedBinnedWindowedExtractor;
 import org.openimaj.math.statistics.distribution.Histogram;
 
 /**
