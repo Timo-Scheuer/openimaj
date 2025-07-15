@@ -43,7 +43,7 @@ import Jama.Matrix;
  * @author Jonathon Hare (jsh2@ecs.soton.ac.uk)
  * 
  */
-public class CachingMultivariateGaussian extends AbstractMultivariateGaussian implements MultivariateGaussian {
+public class CachingMultivariateGaussian extends AbstractMultivariateGaussian {
 	protected Matrix covar;
 	protected int N;
 

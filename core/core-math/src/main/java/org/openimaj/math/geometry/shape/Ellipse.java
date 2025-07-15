@@ -44,7 +44,7 @@ import Jama.Matrix;
  * @author Sina Samangooei (ss@ecs.soton.ac.uk)
  * 
  */
-public class Ellipse implements Shape, Cloneable {
+public class Ellipse implements Shape {
 	private double x;
 	private double y;
 	private double major;

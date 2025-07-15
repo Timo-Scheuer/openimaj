@@ -40,7 +40,7 @@ import Jama.Matrix;
  * @author Jonathon Hare (jsh2@ecs.soton.ac.uk)
  * 
  */
-public class RotatedRectangle implements Shape, Cloneable {
+public class RotatedRectangle implements Shape {
 	/**
 	 * The width of the rotated rectangle (Note that this is different to the
 	 * width returned by {@link #getWidth()} which is the width of the regular
