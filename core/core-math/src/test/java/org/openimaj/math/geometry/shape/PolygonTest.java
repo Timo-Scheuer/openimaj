@@ -40,7 +40,7 @@ import org.junit.Test;
 import org.openimaj.math.geometry.point.Point2d;
 import org.openimaj.math.geometry.point.Point2dImpl;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 /**
  *
