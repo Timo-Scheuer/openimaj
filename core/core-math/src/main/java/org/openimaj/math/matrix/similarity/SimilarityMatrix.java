@@ -36,10 +36,9 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import org.jgrapht.UndirectedGraph;
+import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
-import org.openimaj.io.ReadWriteable;
 import org.openimaj.math.matrix.ReadWriteableMatrix;
 import org.openimaj.math.matrix.similarity.processor.SimilarityMatrixProcessor;
 
@@ -52,7 +51,7 @@ import Jama.Matrix;
  * 
  * @author Jonathon Hare (jsh2@ecs.soton.ac.uk)
  */
-public class SimilarityMatrix extends ReadWriteableMatrix implements ReadWriteable {
+public class SimilarityMatrix extends ReadWriteableMatrix {
 	private static final long serialVersionUID = 1L;
 
 	protected String[] index;
@@ -212,8 +211,8 @@ public class SimilarityMatrix extends ReadWriteableMatrix implements ReadWriteab
 	 * @param threshold the threshold
 	 * @return the graph
 	 */
-	public UndirectedGraph<String, DefaultEdge> toUndirectedUnweightedGraph(double threshold) {
-		UndirectedGraph<String, DefaultEdge> graph = new SimpleGraph<String, DefaultEdge>(DefaultEdge.class);
+	public Graph<String, DefaultEdge> toUndirectedUnweightedGraph(double threshold) {
+		Graph<String, DefaultEdge> graph = new SimpleGraph<String, DefaultEdge>(DefaultEdge.class);
 
 		final int rows = this.getRowDimension();
 		final int cols = this.getColumnDimension();

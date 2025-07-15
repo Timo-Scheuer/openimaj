@@ -18,29 +18,39 @@
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <commons-math.version>3.6.1</commons-math.version>
+    <gov-sandia.version>3.3.0</gov-sandia.version><!-- more recent version available -->
+    <jama.version>1.0.3</jama.version>
+    <jgrapht-core.version>1.5.2</jgrapht-core.version>
+    <jmatio.version>1.5</jmatio.version>
+    <junit.version>4.13.2</junit.version>
+    <la4j.version>0.7.0</la4j.version>
+    <mtj.version>1.0.4</mtj.version>
+    <xstream.version>1.4.21</xstream.version>
   </properties>
   
   <dependencies>
     <dependency>
       <groupId>org.openimaj</groupId>
       <artifactId>core</artifactId>
-      <version>1.5.0-SNAPSHOT</version>
+      <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>gov.nist.math</groupId>
       <artifactId>jama</artifactId>
-      <version>1.0.3</version>
+      <version>${jama.version}</version>
     </dependency>
     <dependency>
-  <groupId>org.la4j</groupId>
-  <artifactId>la4j</artifactId>
-  <version>0.4.0</version>
-</dependency>
+	  <groupId>dev.secondsun</groupId>
+	  <artifactId>org.la4j.la4j</artifactId>
+	  <version>${la4j.version}</version>
+	</dependency>
     <dependency>
       <groupId>com.googlecode.matrix-toolkits-java</groupId>
       <artifactId>mtj</artifactId>
-      <version>1.0.2</version>
+      <version>${mtj.version}</version>
     </dependency>
     <dependency>
       <groupId>net.jafama</groupId>
@@ -48,9 +58,15 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>jgrapht</groupId>
-      <artifactId>jgrapht</artifactId>
-      <version>0.8.2</version>
+      <groupId>org.jgrapht</groupId>
+      <artifactId>jgrapht-core</artifactId>
+      <version>${jgrapht-core.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jgrapht</groupId>
+      <artifactId>jgrapht-opt</artifactId>
+      <version>${jgrapht-core.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -60,7 +76,7 @@
     <dependency>
       <groupId>gov.sandia.foundry</groupId>
       <artifactId>gov-sandia-cognition-common-core</artifactId>
-      <version>3.3.0</version>
+      <version>${gov-sandia.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>com.thoughtworks.xstream</groupId>
@@ -68,11 +84,11 @@
 				</exclusion>
 			</exclusions>
     </dependency>
-		<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
-			<version>1.4.19</version>
-		</dependency>
+	<dependency>
+		<groupId>com.thoughtworks.xstream</groupId>
+		<artifactId>xstream</artifactId>
+		<version>${xstream.version}</version>
+	</dependency>
     <!-- <dependency>
       <groupId>gov.sandia.foundry</groupId>
       <artifactId>gov-sandia-cognition-common-data</artifactId>
@@ -81,7 +97,7 @@
     <dependency>
       <groupId>gov.sandia.foundry</groupId>
       <artifactId>gov-sandia-cognition-learning-core</artifactId>
-      <version>3.3.0</version>
+      <version>${gov-sandia.version}</version>
     </dependency>
     <!-- <dependency>
       <groupId>gov.sandia.foundry</groupId>
@@ -99,20 +115,20 @@
       <version>3.3.0</version>
     </dependency> -->
     <dependency>
-      <groupId>net.sourceforge.jmatio</groupId>
+      <groupId>org.tallison</groupId>
       <artifactId>jmatio</artifactId>
-      <version>1.2</version>
+      <version>${jmatio.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-math3</artifactId>
-      <version>3.3</version>
+      <version>${commons-math.version}</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.13.1</version>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -120,9 +136,8 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>com.mycila.maven-license-plugin</groupId>
-        <artifactId>maven-license-plugin</artifactId>
-        <version>1.9.0</version>
+		<groupId>com.mycila</groupId>
+		<artifactId>license-maven-plugin</artifactId>
         <configuration>
           <header>src/etc/header.txt</header>
           <strictCheck>true</strictCheck>

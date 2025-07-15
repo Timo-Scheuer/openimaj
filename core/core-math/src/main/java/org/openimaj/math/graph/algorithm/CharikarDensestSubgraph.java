@@ -30,10 +30,8 @@
 package org.openimaj.math.graph.algorithm;
 
 import org.jgrapht.Graph;
-import org.jgrapht.UndirectedGraph;
-import org.jgrapht.graph.UndirectedSubgraph;
-import org.jgrapht.util.FibonacciHeap;
-import org.jgrapht.util.FibonacciHeapNode;
+import org.jgrapht.graph.AsSubgraph;
+import org.jheaps.tree.FibonacciHeap;
 
 /**
  * Implementation of Charikar's greedy Densest-subgraph algorithm for
@@ -45,24 +43,26 @@ import org.jgrapht.util.FibonacciHeapNode;
  * @param <E> type of edge
  */
 public class CharikarDensestSubgraph<V, E> {
-	protected UndirectedGraph<V, E> graph;
-	protected UndirectedSubgraph<V,E> bestSubGraph;
-	protected FibonacciHeap<V> heap = new FibonacciHeap<V>();
+	protected Graph<V, E> graph;
+	protected AsSubgraph<V,E> bestSubGraph;
+	protected FibonacciHeap<V,Integer> heap = new FibonacciHeap<V, Integer>();
 	
 	/**
 	 * Compute the densest subgraph of a graph.
 	 * @param graph the graph.
 	 */
-	public CharikarDensestSubgraph(UndirectedGraph<V, E> graph) {
+	public CharikarDensestSubgraph(Graph<V, E> graph) {
+		assert(graph.getType().isUndirected());
 		this.graph = graph;
 		
 		for (V vertex : graph.vertexSet())
-			heap.insert(new FibonacciHeapNode<V>(vertex), graph.degreeOf(vertex));
+			heap.insert(vertex, graph.degreeOf(vertex));
 		
 		calculateDensestSubgraph();
 	}
 	
-	protected V getMinDegreeVertexBruteForce(UndirectedGraph<V, E> graph) {
+	protected V getMinDegreeVertexBruteForce(Graph<V, E> graph) {
+		assert(graph.getType().isUndirected());
 		int minDegree = Integer.MAX_VALUE;
 		V minDegreeVertex = null;
 		
@@ -77,16 +77,17 @@ public class CharikarDensestSubgraph<V, E> {
 		return minDegreeVertex;
 	}
 	
-	protected V getMinDegreeVertex(UndirectedGraph<V, E> graph) {		
-		return heap.removeMin().getData();
+	protected V getMinDegreeVertex(Graph<V, E> graph) {
+		assert(graph.getType().isUndirected());
+		return heap.deleteMin().getKey();
 	}
 	
 	protected void calculateDensestSubgraph() {
-		UndirectedSubgraph<V,E> currentSubGraph = new UndirectedSubgraph<V,E>(graph, graph.vertexSet(), null);
+		AsSubgraph<V,E> currentSubGraph = new AsSubgraph<V,E>(graph, graph.vertexSet(), null);
 		double bestDensity = calculateDensity(graph);
 		
 		while (currentSubGraph.vertexSet().size() > 0) {
-			currentSubGraph = new UndirectedSubgraph<V,E>(graph, currentSubGraph.vertexSet(), null);
+			currentSubGraph = new AsSubgraph<V,E>(graph, currentSubGraph.vertexSet(), null);
 			currentSubGraph.removeVertex(getMinDegreeVertex(currentSubGraph));
 			double density = calculateDensity(currentSubGraph);
 			
@@ -110,7 +111,7 @@ public class CharikarDensestSubgraph<V, E> {
 	/**
 	 * @return The densest subgraph
 	 */
-	public UndirectedSubgraph<V, E> getDensestSubgraph() {
+	public AsSubgraph<V, E> getDensestSubgraph() {
 		return bestSubGraph;
 	}
 }
