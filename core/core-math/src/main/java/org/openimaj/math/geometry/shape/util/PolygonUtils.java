@@ -209,7 +209,7 @@ public class PolygonUtils
 	{
 		try
 		{
-			return (Polygon) polyClass.newInstance();
+			return (Polygon) polyClass.getDeclaredConstructor().newInstance();
 		}
 		catch( Exception e )
 		{

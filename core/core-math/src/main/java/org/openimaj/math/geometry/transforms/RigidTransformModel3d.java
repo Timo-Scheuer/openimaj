@@ -46,9 +46,7 @@ import Jama.Matrix;
  * @author Jonathon Hare
  * 
  */
-public class RigidTransformModel3d extends AffineTransformModel3d
-		implements MatrixTransformProvider
-{
+public class RigidTransformModel3d extends AffineTransformModel3d {
 	/**
 	 * Create a {@link RigidTransformModel3d}
 	 */
