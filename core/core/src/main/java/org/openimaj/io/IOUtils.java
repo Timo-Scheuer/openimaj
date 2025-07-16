@@ -347,7 +347,7 @@ public class IOUtils {
 			final BufferedReader br = new BufferedReader(new InputStreamReader(bis));
 			final char[] holder = new char[((ReadableASCII) obj).asciiHeader().length()];
 			br.read(holder);
-			((ReadableASCII) obj).readASCII(new Scanner(br).useLocale(Locale.ENGLISH));
+			((ReadableASCII) obj).readASCII(new Scanner(br).useLocale(Locale.ROOT));
 			return obj;
 		}
 	}

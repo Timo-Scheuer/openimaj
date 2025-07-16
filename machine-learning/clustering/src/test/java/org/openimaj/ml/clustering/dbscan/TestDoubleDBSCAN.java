@@ -61,9 +61,13 @@ public class TestDoubleDBSCAN {
 	public void loadTest() throws IOException{
 		String[] data = FileUtils.readlines(TestDoubleDBSCAN.class.getResourceAsStream("/org/openimaj/ml/clustering/dbscan/dbscandata"));
 		ClusterTestDataLoader loader = new ClusterTestDataLoader();
-		this.testStats = loader.readTestStats(data);
-		this.testData = loader.readTestData(data);
-		this.testClusters = loader.readTestClusters(data);
+		try {
+			this.testStats = loader.readTestStats(data);
+			this.testData = loader.readTestData(data);
+			this.testClusters = loader.readTestClusters(data);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	/**

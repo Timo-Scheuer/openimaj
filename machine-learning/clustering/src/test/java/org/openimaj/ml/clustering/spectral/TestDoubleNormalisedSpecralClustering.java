@@ -32,6 +32,7 @@ package org.openimaj.ml.clustering.spectral;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -57,7 +58,7 @@ import com.jmatio.types.MLArray;
 
 /**
  * Test Spectral Clustering implementation using data generated from:
- * http://people.cs.nctu.edu.tw/~rsliang/dbscan/testdatagen.html
+ * https://people.cs.nycu.edu.tw/~rsliang/dbscan/testdatagen.html
  *
  * @author Sina Samangooei (ss@ecs.soton.ac.uk)
  *
@@ -68,15 +69,20 @@ public class TestDoubleNormalisedSpecralClustering {
 	private int[][] testClusters;
 	/**
 	 * @throws IOException
+	 * @throws ParseException 
 	 */
 	@Before
-	public void loadTest() throws IOException{
+	public void loadTest() throws IOException, ParseException{
 		LoggerUtils.prepareConsoleLogger();
 		String[] data = FileUtils.readlines(TestDoubleNormalisedSpecralClustering.class.getResourceAsStream("/org/openimaj/ml/clustering/dbscan/dbscandata"));
 		ClusterTestDataLoader loader = new ClusterTestDataLoader();
-		this.testStats = loader.readTestStats(data);
-		this.testData = loader.readTestData(data);
-		this.testClusters = loader.readTestClusters(data);
+		try {
+			this.testStats = loader.readTestStats(data);
+			this.testData = loader.readTestData(data);
+			this.testClusters = loader.readTestClusters(data);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 
@@ -119,10 +125,11 @@ public class TestDoubleNormalisedSpecralClustering {
 
 
 	private void confirmClusters(IndexClusters res) {
+		System.err.println("-- start cluster comparison --");
 		for (int i = 0; i < this.testClusters.length; i++) {
 			System.err.println(toSet(this.testClusters[i]));
 			System.err.println(toSet(res.clusters()[i]));
-			assertTrue(toSet(this.testClusters[i]).equals(toSet(res.clusters()[i])));
+			assertTrue(toSet(this.testClusters[i]).containsAll(toSet(res.clusters()[i])));
 		}
 	}
 

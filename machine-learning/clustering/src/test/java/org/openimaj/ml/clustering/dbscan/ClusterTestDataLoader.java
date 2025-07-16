@@ -29,8 +29,11 @@
  */
 package org.openimaj.ml.clustering.dbscan;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -73,15 +76,17 @@ public class ClusterTestDataLoader{
 	/**
 	 * @param data
 	 * @return read {@link TestStats}
+	 * @throws ParseException 
 	 */
-	public TestStats readTestStats(String[] data) {
+	public TestStats readTestStats(String[] data) throws ParseException {
 		ClusterTestDataLoader.TestStats ret = new TestStats();
+		NumberFormat format = NumberFormat.getInstance(Locale.ROOT);
 		int i = 0;
-		ret.eps = Double.parseDouble(data[i++].split("=")[1].trim());
+		ret.eps = format.parse(data[i++].split("=")[1].trim()).doubleValue();
 		ret.minpts = Integer.parseInt(data[i++].split("=")[1].trim());
 		ret.ncluster = Integer.parseInt(data[i++].split("=")[1].trim());
 		ret.noutliers = Integer.parseInt(data[i++].split("=")[1].trim());
-		ret.mineps = Double.parseDouble(data[i++].split("=")[1].trim());
+		ret.mineps = format.parse(data[i++].split("=")[1].trim()).doubleValue();
 		return ret;
 	}
 
@@ -124,8 +129,9 @@ public class ClusterTestDataLoader{
 	/**
 	 * @param data
 	 * @return read the test data
+	 * @throws ParseException 
 	 */
-	public double[][] readTestData(String[] data) {
+	public double[][] readTestData(String[] data) throws ParseException {
 		int i = 0;
 		for (;data[i].length()!=0; i++);
 		List<double[]> dataL = new ArrayList<double[]>();
@@ -135,11 +141,12 @@ public class ClusterTestDataLoader{
 		logger.debug(String.format("Loading %d data items\n",dataL.size()));
 		return dataL.toArray(new double[dataL.size()][]);
 	}
-	private double[] readDataLine(String string) {
+	private double[] readDataLine(String string) throws ParseException {
+		NumberFormat format = NumberFormat.getInstance(Locale.ROOT);
 		String[] split = string.split(" ");
 		double[] arr = new double[]{
-				Double.parseDouble(split[1]),
-				Double.parseDouble(split[2])
+				format.parse(split[1]).doubleValue(),
+				format.parse(split[2]).doubleValue()
 		};
 		return arr;
 	}
