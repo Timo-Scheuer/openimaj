@@ -45,8 +45,8 @@ import org.openimaj.math.geometry.shape.Triangle;
  * The Delaunay Triangulation algorithm. Produces a triangulation of a set of
  * points.
  * <p>
- * Originally ported from <a
- * href="http://paulbourke.net/papers/triangulate/"Paul Bourke's
+ * Originally ported from
+ * <a href="http://paulbourke.net/papers/triangulate/">Paul Bourke's
  * triangulate.c</a>.
  * <p>
  * This OpenIMAJ version is based off <a

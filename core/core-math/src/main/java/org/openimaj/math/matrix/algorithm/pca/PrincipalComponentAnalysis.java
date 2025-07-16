@@ -195,7 +195,7 @@ public abstract class PrincipalComponentAnalysis {
 	/**
 	 * Zero-centre the data matrix and return a copy
 	 * 
-	 * @param data
+	 * @param m
 	 *            the data matrix
 	 * @return the normalised data
 	 */

@@ -387,7 +387,7 @@ public enum FundamentalRefinement {
 	/**
 	 * Based on the following matlab: <code>
 	 * <pre>
-	 * % Based on Eqn 11.10 in H&Z ("Symmetric Epipolar Distance")
+	 * % Based on Eqn 11.10 in H&amp;Z ("Symmetric Epipolar Distance")
 	 * syms f1 f2 f3 f4 f5 f6 real
 	 * syms r s real
 	 * syms x y X Y real
@@ -497,7 +497,7 @@ public enum FundamentalRefinement {
 	/**
 	 * Based on the following matlab: <code>
 	 * <pre>
-	 * % Based on Eqn 11.10 in H&Z ("Symmetric Epipolar Distance")
+	 * % Based on Eqn 11.10 in H&amp;Z ("Symmetric Epipolar Distance")
 	 * syms f1 f2 f3 f7 f8 f9 real
 	 * syms r s real
 	 * syms x y X Y real
@@ -618,7 +618,7 @@ public enum FundamentalRefinement {
 	/**
 	 * Based on the following matlab: <code>
 	 * <pre>
-	 * % Based on Eqn 11.10 in H&Z ("Symmetric Epipolar Distance")
+	 * % Based on Eqn 11.10 in H&amp;Z ("Symmetric Epipolar Distance")
 	 * syms f4 f5 f6 f7 f8 f9 real
 	 * syms r s real
 	 * syms x y X Y real
@@ -739,7 +739,7 @@ public enum FundamentalRefinement {
 	/**
 	 * Based on the following matlab: <code>
 	 * <pre>
-	 * % Based on Eqn 11.9 in H&Z ("First order geometric error (Sampson distance)")
+	 * % Based on Eqn 11.9 in H&amp;Z ("First order geometric error (Sampson distance)")
 	 * syms f1 f2 f3 f4 f5 f6 real
 	 * syms r s real
 	 * syms x y X Y real
@@ -845,7 +845,7 @@ public enum FundamentalRefinement {
 	/**
 	 * Based on the following matlab: <code>
 	 * <pre>
-	 * % Based on Eqn 11.9 in H&Z ("First order geometric error (Sampson distance)")
+	 * % Based on Eqn 11.9 in H&amp;Z ("First order geometric error (Sampson distance)")
 	 * syms f1 f2 f3 f7 f8 f9 real
 	 * syms r s real
 	 * syms x y X Y real
@@ -962,7 +962,7 @@ public enum FundamentalRefinement {
 	/**
 	 * Based on the following matlab: <code>
 	 * <pre>
-	 * % Based on Eqn 11.9 in H&Z ("First order geometric error (Sampson distance)")
+	 * % Based on Eqn 11.9 in H&amp;Z ("First order geometric error (Sampson distance)")
 	 * syms f4 f5 f6 f7 f8 f9 real
 	 * syms r s real
 	 * syms x y X Y real
