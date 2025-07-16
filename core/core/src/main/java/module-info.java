@@ -4,7 +4,7 @@ module org.openimaj.core {
 	requires ant;
 	requires colt;
 	requires com.esotericsoftware.kryo;
-	requires core;
+	requires transitive core;
 	requires jal;
 	requires org.apache.commons.io;
 	requires org.apache.commons.lang3;
@@ -16,7 +16,15 @@ module org.openimaj.core {
 	requires org.apache.logging.log4j.core;
 	requires org.jsoup;
 	requires org.objenesis;
-	requires org.openimaj.citation;
+	requires transitive org.openimaj.citation;
 	
-	//exports ;
+	exports org.openimaj.data;
+	exports org.openimaj.io;
+	exports org.openimaj.util;
+	exports org.openimaj.util.array;
+	exports org.openimaj.util.comparator;
+	exports org.openimaj.util.function;
+	exports org.openimaj.util.math;
+	exports org.openimaj.util.pair;
+	exports org.openimaj.util.tree;
 }
