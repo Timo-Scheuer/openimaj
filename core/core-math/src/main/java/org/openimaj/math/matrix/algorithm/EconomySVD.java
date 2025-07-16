@@ -27,16 +27,22 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package no.uib.cipr.matrix;
+package org.openimaj.math.matrix.algorithm;
 
 import org.netlib.util.intW;
 
 import com.github.fommil.netlib.LAPACK;
 
+import no.uib.cipr.matrix.DenseMatrix;
+import no.uib.cipr.matrix.Matrix;
+import no.uib.cipr.matrix.NotConvergedException;
+
 /**
  * Computes economy singular value decompositions. Uses DGESDD internally.
  */
 public class EconomySVD {
+	
+	private static final String COMPUTE_SINGULAR_VECTOR_PARTS = "S"; // JobSVD.Part.netlib()
 
 	/**
 	 * Work array
@@ -77,8 +83,8 @@ public class EconomySVD {
 
 		// Allocate space for the decomposition
 		S = new double[Math.min(m, n)];
-		U = new DenseMatrix(Matrices.ld(m), Math.min(m, n));
-		Vt = new DenseMatrix(Matrices.ld(Math.min(m, n)), n);
+		U = new DenseMatrix(leadingDimension(m), Math.min(m, n));
+		Vt = new DenseMatrix(leadingDimension(Math.min(m, n)), n);
 
 		// Find workspace requirements
 		iwork = new int[8 * Math.min(m, n)];
@@ -86,9 +92,9 @@ public class EconomySVD {
 		// Query optimal workspace
 		final double[] worksize = new double[1];
 		final intW info = new intW(0);
-		LAPACK.getInstance().dgesdd(JobSVD.Part.netlib(), m, n, new double[0],
-				Matrices.ld(m), new double[0], new double[0], U.numRows,
-				new double[0], Vt.numRows, worksize, -1, iwork, info);
+		LAPACK.getInstance().dgesdd(COMPUTE_SINGULAR_VECTOR_PARTS, m, n, new double[0],
+				leadingDimension(m), new double[0], new double[0], U.numRows(),
+				new double[0], Vt.numRows(), worksize, -1, iwork, info);
 
 		// Allocate workspace
 		int lwork = -1;
@@ -131,11 +137,11 @@ public class EconomySVD {
 
 		final intW info = new intW(0);
 
-		LAPACK.getInstance().dgesdd(JobSVD.Part.netlib(), m, n,
-				A.getData(), A.numRows,
+		LAPACK.getInstance().dgesdd(COMPUTE_SINGULAR_VECTOR_PARTS, m, n,
+				A.getData(), A.numRows(),
 				S,
-				U.getData(), U.numRows,
-				Vt.getData(), Vt.numRows,
+				U.getData(), U.numRows(),
+				Vt.getData(), Vt.numRows(),
 				work, work.length, iwork, info);
 
 		if (info.val > 0)
@@ -176,4 +182,13 @@ public class EconomySVD {
 		return S;
 	}
 
+    /**
+     * <code>max(1, M)</code> provided as a convenience for 'leading dimension'
+     * calculations.
+     * 
+     * @param n
+     */
+    static int leadingDimension(int n) {
+        return Math.max(1, n);
+    }
 }

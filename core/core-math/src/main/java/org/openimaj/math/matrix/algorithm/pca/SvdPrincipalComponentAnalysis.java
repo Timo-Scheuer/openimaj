@@ -31,6 +31,8 @@ package org.openimaj.math.matrix.algorithm.pca;
 
 import java.util.Arrays;
 
+import org.openimaj.math.matrix.algorithm.EconomySVD;
+
 import no.uib.cipr.matrix.NotConvergedException;
 import Jama.Matrix;
 
@@ -69,7 +71,7 @@ public class SvdPrincipalComponentAnalysis extends PrincipalComponentAnalysis {
 	public void learnBasisNorm(Matrix norm) {
 		try {
 			final no.uib.cipr.matrix.DenseMatrix mjtA = new no.uib.cipr.matrix.DenseMatrix(norm.getArray());
-			final no.uib.cipr.matrix.EconomySVD svd = no.uib.cipr.matrix.EconomySVD.factorize(mjtA);
+			final EconomySVD svd = org.openimaj.math.matrix.algorithm.EconomySVD.factorize(mjtA);
 
 			final no.uib.cipr.matrix.DenseMatrix output = svd.getVt();
 
