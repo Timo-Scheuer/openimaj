@@ -13,6 +13,7 @@
   <inceptionYear>2011</inceptionYear>
   <description>Sub-modules containing commandline tools exposing OpenIMAJ functionality.</description>
   <modules>
+    <module>jtemp-maven-plugin</module>
     <module>core-tool</module>
     <module>GlobalFeaturesTool</module>
     <module>ClusterQuantiserTool</module>

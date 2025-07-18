@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+  <parent>
+    <artifactId>openimaj-tools</artifactId>
+    <groupId>org.openimaj</groupId>
+    <version>1.5.0-SNAPSHOT</version>
+    <relativePath>../</relativePath>
+  </parent>
+  <groupId>org.openimaj.tools</groupId>
+	<artifactId>jtemp-maven-plugin</artifactId>
+	<name>jTemp Maven Plugin</name>
+	
+	<inceptionYear>2011</inceptionYear>
+	
+	<packaging>maven-plugin</packaging>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<gmavenplus-plugin.version>4.0.1</gmavenplus-plugin.version>
+		<groovy.version>4.0.27</groovy.version>
+		<junit.jupiter.version>5.11.4</junit.jupiter.version>
+		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+	</properties>
+
+	<dependencies>
+		<!-- Maven plugin development -->
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-plugin-api</artifactId>
+			<version>3.9.6</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-core</artifactId>
+			<version>3.9.6</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugin-tools</groupId>
+			<artifactId>maven-plugin-annotations</artifactId>
+			<version>3.13.1</version> 
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Groovy -->
+		<dependency>
+			<groupId>org.apache.groovy</groupId>
+			<artifactId>groovy</artifactId>
+			<version>${groovy.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.groovy</groupId>
+			<artifactId>groovy-templates</artifactId>
+			<version>${groovy.version}</version>
+		</dependency>
+		<!-- Add other groovy modules if needed, like groovy-xml, groovy-json etc.
+			 groovy-all is a pom, so better to specify needed modules.
+			 For a plugin, groovy (core) and groovy-templates might be enough. -->
+
+		<!-- Test -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit.jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<release>11</release>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.mycila</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>5.0.0</version>
+				<configuration>
+					<header>src/etc/header.txt</header>
+					<strictCheck>true</strictCheck>
+					<properties>
+						<year>${project.inceptionYear}</year>
+					</properties>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.gmavenplus</groupId>
+				<artifactId>gmavenplus-plugin</artifactId>
+				<version>${gmavenplus-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>addSources</goal>
+							<goal>addTestSources</goal>
+							<goal>compile</goal>
+							<goal>compileTests</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<argLine>--add-opens java.base/java.lang=ALL-UNNAMED</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-plugin-plugin</artifactId>
+                 <version>3.13.1</version>
+                 <configuration>
+                     <goalPrefix>jtemp</goalPrefix>
+                     <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
+                 </configuration>
+                 <executions>
+                     <execution>
+                         <id>mojo-descriptor</id>
+                         <goals>
+                             <goal>descriptor</goal>
+                         </goals>
+                     </execution>
+                     <execution>
+                        <id>help-goal</id>
+                        <goals>
+                            <goal>helpmojo</goal>
+                        </goals>
+                    </execution>
+                 </executions>
+            </plugin>
+		</plugins>
+	</build>
+	<distributionManagement>
+		<repository>
+			<id>openimaj-releases</id>
+			<name>OpenIMAJ Maven Releases Repository</name>
+			<url>http://maven.ecs.soton.ac.uk/content/repositories/openimaj-releases/</url>
+		</repository>
+	 </distributionManagement>
+</project>
